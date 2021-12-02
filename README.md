@@ -1,6 +1,6 @@
-# Livraria-Backend-Node
+# Livraria-Frontend-React
 
-This is a library project created to take a grasp of node backend knowledge
+This is a library project created to take a grasp of react knowledge
 
 # Steps to Run
 
