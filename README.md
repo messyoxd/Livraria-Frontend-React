@@ -6,7 +6,7 @@ This is a library project created to take a grasp of node backend knowledge
 
 ## Run locally at port 5000
 ```
-cd src
+cd frontend
 npm install
 npm start
 ```
