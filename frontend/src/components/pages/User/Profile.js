@@ -8,7 +8,7 @@ import { useState, useEffect } from "react";
 
 function Profile() {
     const { setFlashMessage } = useFlashMessage();
-    const [user, setUser] = useState({});
+    const [editUser, setEditUser] = useState({});
     const [token] = useState(localStorage.getItem("token") || "");
 
     useEffect(() => {
@@ -17,13 +17,13 @@ function Profile() {
                 Authorization: `Bearer ${JSON.parse(token)}`,
             },
         }).then((response) => {
-            setUser(response.data);
+            setEditUser(response.data);
         });
     }, [token]);
 
     function handleChange(e) {
-        setUser({
-            ...user,
+        setEditUser({
+            ...editUser,
             [e.target.name]: e.target.value,
         });
     }
@@ -33,13 +33,14 @@ function Profile() {
         let msgText = "";
         let msgType = "success";
         await api
-            .patch("/users/edit", user, {
+            .patch("/users/edit", editUser, {
                 headers: {
                     Authorization: `Bearer ${JSON.parse(token)}`,
                 },
             })
             .then((response) => {
                 msgText = response.data.message;
+                localStorage.setItem("user", JSON.stringify(editUser));
             })
             .catch((err) => {
                 msgType = "error";
@@ -57,7 +58,7 @@ function Profile() {
                     type="text"
                     name="name"
                     placeholder="Type your name"
-                    value={user.name || ""}
+                    value={editUser.name || ""}
                     handleOnChange={handleChange}
                 />
                 <Input
@@ -65,7 +66,7 @@ function Profile() {
                     type="text"
                     name="phone"
                     placeholder="Type your Phone"
-                    value={user.phone || ""}
+                    value={editUser.phone || ""}
                     handleOnChange={handleChange}
                 />
                 <Input
@@ -73,7 +74,7 @@ function Profile() {
                     type="email"
                     name="email"
                     placeholder="Type your email"
-                    value={user.email || ""}
+                    value={editUser.email || ""}
                     handleOnChange={handleChange}
                 />
                 <Input

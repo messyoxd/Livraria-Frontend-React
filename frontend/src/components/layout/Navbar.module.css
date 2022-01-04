@@ -16,10 +16,17 @@
     margin-right: 0.8em;
 }
 
+.navbar_hello_text {
+    display: flex;
+    align-items: center;
+    padding: 0.5em 0.8em;
+}
+
 .navbar ul {
     display: flex;
     align-items: center;
     list-style-type: none;
+    padding: 0.5em 0.8em;
 }
 
 .navbar li,

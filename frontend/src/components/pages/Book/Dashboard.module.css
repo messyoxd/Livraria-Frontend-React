@@ -1,0 +1,38 @@
+.bookList {
+    text-align: center;
+    flex-direction: column;
+}
+
+.actions{
+    margin-left: auto;
+}
+
+.actions a,
+button {
+    text-decoration: none;
+    color: #fff;
+    border: 2px solid #16479d;
+    border-radius: 5px;
+    padding: 1em 3em;
+    background-color: #16479d;
+    margin-left: 1em;
+    cursor: pointer;
+    transition: 0.5s;
+    font-weight: bold;
+    font-size: 15px;
+}
+.actions a:hover,
+button:hover {
+    background-color: transparent;
+    color: #16479d;
+}
+
+.actions_delete:hover {
+    background-color: #cc351b;
+    color: #fff;
+}
+
+.actions_edit:hover {
+    background-color: #eeb03d;
+    color: #fff;
+}

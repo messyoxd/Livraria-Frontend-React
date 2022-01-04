@@ -9,16 +9,28 @@ import { useContext } from "react";
 
 function Navbar() {
     const { authenticated, logout } = useContext(Context);
+    const user = JSON.parse(localStorage.getItem("user")) || {};
     return (
         <nav className={styles.navbar}>
             <div className={styles.navbar_logo}>
                 <img src={Logo} alt="Livrary" />
                 <h2>Library</h2>
             </div>
-
+            <div className={styles.navbar_hello_text}>
+                {authenticated ? (
+                    <>
+                        <h3>Olá, {user.name}</h3>
+                    </>
+                ) : (
+                    <></>
+                )}
+            </div>
             <ul>
                 <li>
                     <Link to="/">Home</Link>
+                </li>
+                <li>
+                    <Link to="/books">Books</Link>
                 </li>
                 {authenticated ? (
                     <>

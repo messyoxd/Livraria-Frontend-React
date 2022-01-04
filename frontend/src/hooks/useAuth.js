@@ -8,6 +8,8 @@ import handleHttpErrors from '../utils/errors'
 export default function useAuth() {
     const { setFlashMessage } = useFlashMessage();
     const [authenticated, setAuthenticated] = useState(false);
+    // const [admin, setAdmin] = useState(false);
+    // const [user, setUser] = useState({});
     const history = useNavigate();
 
     useEffect(() => {
@@ -38,6 +40,20 @@ export default function useAuth() {
     async function authUser(data) {
         setAuthenticated(true);
         localStorage.setItem("token", JSON.stringify(data.token));
+        try {
+            const res = await api
+                .get("/users/check", {
+                    headers:{
+                        Authorization: `Bearer ${data.token}`
+                    }
+                })
+                .then((response) => {
+                    return response.data;
+                });
+            localStorage.setItem("user", JSON.stringify(res))
+        } catch (error) {
+            console.log(error);
+        }
         history("/");
     }
 
@@ -63,6 +79,7 @@ export default function useAuth() {
                 });
             await authUser(data);
         } catch (error) {
+            console.log(error);
             msgText = handleHttpErrors(error.response);
             msgType = "error";
         }
